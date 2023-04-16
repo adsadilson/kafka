@@ -8,18 +8,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.core.ProducerFactory;
 
 import java.util.HashMap;
 
 @RequiredArgsConstructor
 @Configuration
-public class StringProducerFactoryConfig {
+public class ProducerFactory {
 
     private final KafkaProperties properties;
 
     @Bean
-    public ProducerFactory<String, String> producerFactory() {
+    public org.springframework.kafka.core.ProducerFactory<String, String> producerFactory() {
         var configs = new HashMap<String, Object>();
         configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getBootstrapServers());
         configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -28,7 +27,7 @@ public class StringProducerFactoryConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplate(ProducerFactory<String, String> producerFactory) {
+    public KafkaTemplate<String, String> kafkaTemplate(org.springframework.kafka.core.ProducerFactory<String, String> producerFactory) {
         return new KafkaTemplate<>(producerFactory);
     }
 }

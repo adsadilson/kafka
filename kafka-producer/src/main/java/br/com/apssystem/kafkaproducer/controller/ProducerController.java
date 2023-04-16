@@ -1,6 +1,6 @@
 package br.com.apssystem.kafkaproducer.controller;
 
-import br.com.apssystem.kafkaproducer.service.StringProducerService;
+import br.com.apssystem.kafkaproducer.service.ProducerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/producer")
-public class StringProducerController {
+public class ProducerController {
 
-    private final StringProducerService producerService;
+    private final ProducerService producerService;
     @PostMapping
     public ResponseEntity<?> sendMessage(@RequestBody String message){
         producerService.sendMessage(message);
